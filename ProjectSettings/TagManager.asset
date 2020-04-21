@@ -16,7 +16,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Flame
   - 
   - 
   - 
@@ -43,4 +43,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 835296183
+    locked: 0
+  - name: Ground
+    uniqueID: 3114232359
+    locked: 0
+  - name: Flame
+    uniqueID: 475125455
+    locked: 0
+  - name: Players & Enemies
+    uniqueID: 42150351
     locked: 0
