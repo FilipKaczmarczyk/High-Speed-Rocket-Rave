@@ -15,9 +15,9 @@ public class RepeatingBackground : MonoBehaviour
         bgVerticalLength = bgCollider.size.y;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (transform.position.y < -bgVerticalLength)
+        if (transform.position.y <= -bgVerticalLength)
         {
             RepositionBackground();
         }

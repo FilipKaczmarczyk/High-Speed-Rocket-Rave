@@ -5,9 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
-    public static GameControl instance;            
+    public static GameControl instance;
 
-    public float scrollSpeed = -5f;
+    public Text scoreText;                        
+    public GameObject gameOvertext;
+
+    private int score = 0;
+
+    public float scrollSpeed = -2f;
+
+    float maxScrollSpeed = -2f;
 
     public bool gameOver = false;
 
@@ -19,9 +26,40 @@ public class GameControl : MonoBehaviour
             Destroy(gameObject);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-       
+        if (gameOver && Input.GetMouseButtonDown(0))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        if(score >= 5)
+        {
+            maxScrollSpeed = -4f;
+        }
+        if (score >= 10)
+        {
+            maxScrollSpeed = -6f;
+        }
+        
+        if(scrollSpeed > maxScrollSpeed)
+        {
+            scrollSpeed -= 0.002f;
+        }
+    }
+
+    public void Scored()
+    {
+        if (gameOver)
+            return;
+        score++;
+        scoreText.text = "Score: " + score.ToString();
+    }
+
+    public void Died()
+    {
+        gameOvertext.SetActive(true);
+        gameOver = true;
     }
 
 }

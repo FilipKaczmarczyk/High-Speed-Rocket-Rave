@@ -11,7 +11,7 @@ using System.Collections;
 
     private float distance = 1.875f;
 
-    private float lerpTime = 0.5f;
+    private float lerpTime = 0.4f;
 
     private float currentLerpTime = 0f;
 
@@ -31,7 +31,7 @@ using System.Collections;
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -50,37 +50,43 @@ using System.Collections;
             SetPosition(Vector3.right);
             StartCoroutine(WaitAfterMove());
         }
-        else if (Input.GetKeyDown("up") && canClick)
+        /*else if (Input.GetKeyDown("up") && canClick)
         {
             keyAttackHit = true;
             canClick = false;
             SetAttackPosition();
             StartCoroutine(WaitAfterAttack());
-        }
+        }*/
 
-
-        if (keyHit)
+        if (GameControl.instance.gameOver != true)
         {
-            currentLerpTime += Time.deltaTime;
-            if(currentLerpTime >= lerpTime)
+            if (keyHit)
             {
-                currentLerpTime = lerpTime;
+                currentLerpTime += Time.deltaTime;
+                if (currentLerpTime >= lerpTime)
+                {
+                    currentLerpTime = lerpTime;
+                }
+
+                float Perc = currentLerpTime / lerpTime;
+                rocket.transform.position = Vector3.Lerp(startPos, endPos, Perc);
             }
 
-            float Perc = currentLerpTime / lerpTime;
-            rocket.transform.position = Vector3.Lerp(startPos, endPos, Perc);
-        }
-
-        if (keyAttackHit)
-        {
-            currentLerpAttackTime += Time.deltaTime;
-            if (currentLerpAttackTime >= lerpAttackTime)
+            if (keyAttackHit)
             {
-                currentLerpAttackTime = lerpAttackTime;
-            }
+                currentLerpAttackTime += Time.deltaTime;
+                if (currentLerpAttackTime >= lerpAttackTime)
+                {
+                    currentLerpAttackTime = lerpAttackTime;
+                }
 
-            float Perc = currentLerpAttackTime / lerpAttackTime;
-            rocket.transform.position = Vector3.Lerp(startPos, endPos, Perc);
+                float Perc = currentLerpAttackTime / lerpAttackTime;
+                rocket.transform.position = Vector3.Lerp(startPos, endPos, Perc);
+            }
+        }
+        else
+        {
+            rocket.transform.position = rocket.transform.position;
         }
 
     }
@@ -112,6 +118,11 @@ using System.Collections;
     {
         startPos = rocket.transform.position;
         endPos = rocket.transform.position + Vector3.up * attackDistance;
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        //GameControl.instance.Died();
     }
 
 }   
