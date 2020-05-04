@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public float speed;
+    public GameObject target;
+    public Vector3 offset;
 
     void Start()
     {
@@ -12,11 +15,12 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        
+        if(target != null)
+        {
+            Vector3 targetPos = target.transform.position + offset;
+            Vector3 newPos = Vector2.Lerp(transform.position, targetPos, speed); 
+            transform.position = new Vector3(0f, newPos.y, -1f);
+        }
     }
 
-    public void Move()
-    {
-        transform.position += new Vector3(0f, 0.0555f, 0f);
-    }
 }

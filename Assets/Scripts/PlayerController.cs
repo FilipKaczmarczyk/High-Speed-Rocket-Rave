@@ -3,121 +3,39 @@ using System.Collections;
  
  public class PlayerController : MonoBehaviour
  {
-    public GameObject rocket;
-
-    public Vector3 startPos;
-
-    private Vector3 endPos;
-
-    private float distance = 1.875f;
-
-    private float lerpTime = 0.4f;
-
-    private float currentLerpTime = 0f;
-
-    private bool keyHit = false;
-
-    private float attackDistance = 0.5f;
-
-    private float lerpAttackTime = 0.05f;
-
-    private float currentLerpAttackTime = 0f;
-
-    private bool keyAttackHit = false;
-
-    private bool canClick = true;
-
-    public CameraController cn;
+    public float rotationSpeed = 3f;
+    public float speed = 2f;
 
     void Start()
     {
-
+        
     }
 
     void Update()
     {
-        if (Input.GetKeyDown("left") && canClick)
+        Vector2 rotTarget = transform.position;
+
+        if (Input.GetKey("right"))
         {
-            keyHit = true;
-            canClick = false;
-            SetPosition(Vector3.left);
-            StartCoroutine(WaitAfterMove());
+            rotTarget.x += 8;
+            rotTarget.y += 3;
         }
-        else if (Input.GetKeyDown("right") && canClick)
+        if (Input.GetKey("left"))
         {
-            keyHit = true;
-            canClick = false;
-            SetPosition(Vector3.right);
-            StartCoroutine(WaitAfterMove());
-        }
-        /*else if (Input.GetKeyDown("up") && canClick)
-        {
-            keyAttackHit = true;
-            canClick = false;
-            SetAttackPosition();
-            StartCoroutine(WaitAfterAttack());
-        }*/
-
-        if (GameControl.instance.gameOver != true)
-        {
-            if (keyHit)
-            {
-                currentLerpTime += Time.deltaTime;
-                if (currentLerpTime >= lerpTime)
-                {
-                    currentLerpTime = lerpTime;
-                }
-
-                float Perc = currentLerpTime / lerpTime;
-                rocket.transform.position = Vector3.Lerp(startPos, endPos, Perc);
-            }
-
-            if (keyAttackHit)
-            {
-                currentLerpAttackTime += Time.deltaTime;
-                if (currentLerpAttackTime >= lerpAttackTime)
-                {
-                    currentLerpAttackTime = lerpAttackTime;
-                }
-
-                float Perc = currentLerpAttackTime / lerpAttackTime;
-                rocket.transform.position = Vector3.Lerp(startPos, endPos, Perc);
-            }
+            rotTarget.x -= 4;
+            rotTarget.y += 3;
         }
         else
         {
-            rocket.transform.position = rocket.transform.position;
+            rotTarget.y += 3;
         }
 
-    }
+        Vector2 direction = rotTarget - (Vector2)transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
 
-    IEnumerator WaitAfterMove()
-    {
-        yield return new WaitForSeconds(lerpTime);
-        canClick = true;
-        keyHit = false;
-        currentLerpTime = 0;
-    }
-
-    IEnumerator WaitAfterAttack()
-    {
-        yield return new WaitForSeconds(lerpAttackTime);
-        canClick = true;
-        keyAttackHit = false;
-        currentLerpAttackTime = 0;
-        cn.Move();
-    }
-
-    void SetPosition(Vector3 a)
-    {
-        startPos = rocket.transform.position;
-        endPos = rocket.transform.position + a * distance;
-    }
-
-    void SetAttackPosition()
-    {
-        startPos = rocket.transform.position;
-        endPos = rocket.transform.position + Vector3.up * attackDistance;
+        transform.Translate(Vector2.up * speed * Time.deltaTime);
     }
 
     void OnCollisionEnter2D(Collision2D other)
