@@ -7,6 +7,8 @@ TagManager:
   - New tag
   - Backgrounds
   - Stars
+  - Enemy
+  - Laser
   layers:
   - Default
   - TransparentFX
@@ -17,9 +19,9 @@ TagManager:
   - 
   - 
   - Flame
-  - 
-  - 
-  - 
+  - Enemy
+  - Laser
+  - Player
   - 
   - 
   - 

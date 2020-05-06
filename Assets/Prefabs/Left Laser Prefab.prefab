@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3866050597107695908}
   - component: {fileID: 3996167694044812296}
   - component: {fileID: 3995328301958699780}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: big-particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4584,7 +4584,7 @@ GameObject:
   - component: {fileID: 3865921089806253744}
   - component: {fileID: 3965496323157720810}
   - component: {fileID: 3995848742074930186}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9148,7 +9148,7 @@ GameObject:
   - component: {fileID: 3866305199303997168}
   - component: {fileID: 3996311917227726402}
   - component: {fileID: 3995464606698412244}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: lines-froward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13715,11 +13715,10 @@ GameObject:
   - component: {fileID: 3870827235230555810}
   - component: {fileID: 3870827235230555813}
   - component: {fileID: 3870827235230555811}
-  - component: {fileID: 3870827235230555812}
   - component: {fileID: 3870827235230555808}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left Laser Prefab
-  m_TagString: Untagged
+  m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18447,18 +18446,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8.270034, y: 2.2482862}
   m_EdgeRadius: 0
---- !u!114 &3870827235230555812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3869510621724575754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6449d08da17de3545b9ceab1883f970f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3870827235230555808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18482,7 +18469,7 @@ GameObject:
   - component: {fileID: 3866239099520145360}
   - component: {fileID: 3996287032553595296}
   - component: {fileID: 3995285790732073348}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: lines-small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23046,7 +23033,7 @@ GameObject:
   - component: {fileID: 3866302204418908018}
   - component: {fileID: 3996549985633552852}
   - component: {fileID: 3995646983706131530}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: shadows
   m_TagString: Untagged
   m_Icon: {fileID: 0}

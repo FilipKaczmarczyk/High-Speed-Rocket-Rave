@@ -6,19 +6,15 @@ public class Laser : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<PlayerController>() != null && other.transform.position.x > -3.3 && other.transform.position.x < 3.3
-            && other.transform.position.y >= -4.5 && other.transform.position.y < -2.5)
+        if (other.GetComponent<PlayerController>() != null)
         {
-            GameControl.instance.Scored();
+            GameControl.instance.Scored(1, true);
+            StartCoroutine(WaitAndDestroy(2f));
         }
     }
-
-    void OnCollisionEnter2D(Collision2D other)
+    IEnumerator WaitAndDestroy(float waitTime)
     {
-        if (other.transform.position.x > -3.3 && other.transform.position.x < 3.3 
-            && other.transform.position.y >= -4.5 && other.transform.position.y < -2.5)
-        {
-            GameControl.instance.Died();
-        }
+        yield return new WaitForSeconds(waitTime);
+        Destroy(gameObject);
     }
 }

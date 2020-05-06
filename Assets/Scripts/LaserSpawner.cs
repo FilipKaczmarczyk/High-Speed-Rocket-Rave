@@ -3,24 +3,13 @@ using System.Collections;
 
 public class LaserSpawner : MonoBehaviour
 {
+    public static LaserSpawner instance;
+
     public GameObject laserRightPrefab;
     public GameObject laserLeftPrefab;
-
-    public int laserPoolSize = 5;    
-
-    public float spawnRate = 3f;           
+    public GameObject UfoPrefab;
                                  
-    private GameObject[] lasers;
-
-    private bool[] directions;
-
-    private int currentLaser = 0;                                    
-
-    private Vector2 objectPoolPosition = new Vector2(-15, -25);  
-    
-    private float spawnYPosition = 10f;
-
-    private float timeSinceLastSpawned;
+    private bool direction;                                
 
     float minSpawnXPosition;
 
@@ -28,73 +17,60 @@ public class LaserSpawner : MonoBehaviour
 
     float spawnXPosition;
 
-
+    float spawnYPostion = 10f;
     void Start()
     {
-        timeSinceLastSpawned = 0f;
-
-        lasers = new GameObject[laserPoolSize];
-
-        directions = new bool[laserPoolSize];
-
-        for (int i = 0; i < laserPoolSize; i++)
-        {
-            var rand = Random.Range(0, 2);
-
-            if (rand == 1)
-            {
-                directions[i] = false;
-
-                lasers[i] = (GameObject)Instantiate(laserRightPrefab, objectPoolPosition, Quaternion.identity);
-
-            }
-            else
-            {
-                directions[i] = true;
-
-                lasers[i] = (GameObject)Instantiate(laserLeftPrefab, objectPoolPosition, Quaternion.identity);
-
-                lasers[i].transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
-
-            }
-
-        }
+        instance = this;
+        SpawnLaser();
     }
 
     void Update()
     {
-        timeSinceLastSpawned += Time.deltaTime;
-
-        if (GameControl.instance.gameOver == false && timeSinceLastSpawned >= spawnRate)
-        {
-            timeSinceLastSpawned = 0f;
-
-            if(directions[currentLaser] == true)
-            {
-                minSpawnXPosition = -0.7f;
-
-                maxSpawnXPosition = 1.3f;
-
-                spawnXPosition = Random.Range(minSpawnXPosition, maxSpawnXPosition);
-            }
-            else
-            {
-                minSpawnXPosition = -1.3f;
-
-                maxSpawnXPosition = 0.7f;
-
-                spawnXPosition = Random.Range(minSpawnXPosition, maxSpawnXPosition);
-            }
-
-            lasers[currentLaser].transform.position = new Vector2(spawnXPosition, spawnYPosition);
-
-            currentLaser++;
-
-            if (currentLaser >= laserPoolSize)
-            {
-                currentLaser = 0;
-            }
-        }
+        
     }
 
+    public void SpawnLaser()
+    {
+        var rand = Random.Range(0, 2);
+
+        if (rand == 1)
+        {
+            direction = false;
+
+            minSpawnXPosition = -0.7f;
+
+            maxSpawnXPosition = 1.3f;
+
+            spawnXPosition = Random.Range(minSpawnXPosition, maxSpawnXPosition);
+        }
+        else
+        {
+            direction = true;
+
+            minSpawnXPosition = -1.3f;
+
+            maxSpawnXPosition = 0.7f;
+
+            spawnXPosition = Random.Range(minSpawnXPosition, maxSpawnXPosition);
+        }
+
+        if (!direction)
+        {
+            GameObject laser = Instantiate(laserRightPrefab, new Vector3(spawnXPosition, spawnYPostion, 0f), Quaternion.identity);
+        }
+        else
+        {
+            GameObject laser = Instantiate(laserLeftPrefab, new Vector3(spawnXPosition, spawnYPostion, 0f), Quaternion.identity);
+
+            laser.transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
+        }
+
+        spawnYPostion += 15f;
+
+    }
+
+    public void SpawnUfo()
+    {
+        Instantiate(UfoPrefab, new Vector3(0, PlayerController.instance.transform.position.y + 22f, 0f), Quaternion.identity);
+    }
 }

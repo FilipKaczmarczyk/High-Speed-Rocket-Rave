@@ -12,10 +12,6 @@ public class GameControl : MonoBehaviour
 
     private int score = 0;
 
-    public float scrollSpeed = -2f;
-
-    float maxScrollSpeed = -2f;
-
     public bool gameOver = false;
 
     void Awake()
@@ -32,34 +28,37 @@ public class GameControl : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-
-        if(score >= 5)
-        {
-            maxScrollSpeed = -4f;
-        }
-        if (score >= 10)
-        {
-            maxScrollSpeed = -6f;
-        }
-        
-        if(scrollSpeed > maxScrollSpeed)
-        {
-            scrollSpeed -= 0.002f;
-        }
     }
 
-    public void Scored()
+    public void Scored(int points, bool spawn)
     {
         if (gameOver)
             return;
-        score++;
+        score += points;
         scoreText.text = "Score: " + score.ToString();
+        if (spawn)
+        {
+            PlayerController.instance.UpdateSpeed();
+            LaserSpawner.instance.SpawnLaser();
+            if (RandomEnemy(1.0f) == true)
+            {
+                LaserSpawner.instance.SpawnUfo();
+            }
+        }
     }
 
     public void Died()
     {
         gameOvertext.SetActive(true);
         gameOver = true;
+    }
+
+    public bool RandomEnemy(float maxRange)
+    {
+        float fRand = Random.Range(0.0f, maxRange);
+        if (fRand <= .3f)
+            return true;
+        return false;
     }
 
 }

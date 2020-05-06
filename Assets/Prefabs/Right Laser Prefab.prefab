@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5525894881708543578}
   - component: {fileID: 5620821384853343744}
   - component: {fileID: 5655806325844993248}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4575,7 +4575,7 @@ GameObject:
   - component: {fileID: 5525800372150350286}
   - component: {fileID: 5655487565002335458}
   - component: {fileID: 5655165767313042414}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: big-particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9151,11 +9151,10 @@ GameObject:
   - component: {fileID: 5530031653709350117}
   - component: {fileID: 5530031653709350118}
   - component: {fileID: 5530031653709350116}
-  - component: {fileID: 5530031653709349915}
-  - component: {fileID: 5530031653709349914}
-  m_Layer: 0
+  - component: {fileID: -1005237315433362853}
+  m_Layer: 10
   m_Name: Right Laser Prefab
-  m_TagString: Untagged
+  m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13883,7 +13882,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 9.365824, y: 2.2888246}
   m_EdgeRadius: 0
---- !u!114 &5530031653709349915
+--- !u!114 &-1005237315433362853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13893,18 +13892,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b788324af95c4334784e3bde3a7ec4e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5530031653709349914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5528781834324424928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6449d08da17de3545b9ceab1883f970f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5528891789350151856
@@ -13918,7 +13905,7 @@ GameObject:
   - component: {fileID: 5525579586683496250}
   - component: {fileID: 5655614325703823690}
   - component: {fileID: 5655243377213737326}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: lines-small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18482,7 +18469,7 @@ GameObject:
   - component: {fileID: 5525510720872384026}
   - component: {fileID: 5655586694665103016}
   - component: {fileID: 5655346053203044414}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: lines-froward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23046,7 +23033,7 @@ GameObject:
   - component: {fileID: 5525551702327324568}
   - component: {fileID: 5656511958886873406}
   - component: {fileID: 5654846999667575968}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: shadows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
