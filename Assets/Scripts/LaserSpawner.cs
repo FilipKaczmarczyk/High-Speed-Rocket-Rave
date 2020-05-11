@@ -17,7 +17,7 @@ public class LaserSpawner : MonoBehaviour
 
     float spawnXPosition;
 
-    float spawnYPostion = 10f;
+    float spawnYPostion = 40f;
     void Start()
     {
         instance = this;
@@ -65,7 +65,7 @@ public class LaserSpawner : MonoBehaviour
             laser.transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
         }
 
-        spawnYPostion += 15f;
+        spawnYPostion += 10f;
 
     }
 
