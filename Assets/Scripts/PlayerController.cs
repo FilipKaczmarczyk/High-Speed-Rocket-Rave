@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
- 
- public class PlayerController : MonoBehaviour
+using UnityEngine.SceneManagement;
+
+public class PlayerController : MonoBehaviour
  {
     public static PlayerController instance;
 
@@ -16,6 +17,8 @@ using System.Collections;
     public bool dash = false;
     public float dashCooldown = 2f;
     public float dashCooldownCounter = 0f;
+
+    public int money = 100;
 
     void Start()
     {
@@ -64,7 +67,7 @@ using System.Collections;
                 }
             }
         }
-       
+
     }
     public void UpdateSpeed(float updateValue)
     {
@@ -86,7 +89,7 @@ using System.Collections;
     }
     void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.collider.tag == "Laser" || (other.collider.tag == "Enemy" && dash == false) || other.collider.tag == "MainCamera")
+        if (other.collider.tag == "Laser" || (other.collider.tag == "Enemy" && dash == false) || other.collider.tag == "MainCamera")
             GameControl.instance.Died();
     }
 

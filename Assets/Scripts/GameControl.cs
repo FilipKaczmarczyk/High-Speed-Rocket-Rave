@@ -7,8 +7,13 @@ public class GameControl : MonoBehaviour
 {
     public static GameControl instance;
 
+    public GameObject levelComplete;
+    public Animator anim;
+
     public Text scoreText;                        
     public GameObject gameOvertext;
+
+    public Text levelText;
 
     public Image dashCooldownImage;
     private float dashCooldownCounter;
@@ -17,14 +22,17 @@ public class GameControl : MonoBehaviour
     public GameObject targetPlanet;
     SpriteRenderer targetPlanetRenderer;
 
- /*   public GameObject Planet;
-    SpriteRenderer planetRenderer;*/
-
     private int score = 0;
 
     public bool gameOver = false;
 
     public bool levelEnd = false;
+
+    public int dashCost = 100;
+
+    public static int level = 1;
+
+    public bool one = true;
 
     void Awake()
     {
@@ -49,7 +57,16 @@ public class GameControl : MonoBehaviour
 
         if (levelEnd == true)
         {
-            PlayerController.instance.UpdateSpeed(0.99f);
+            PlayerController.instance.UpdateSpeed(0.998f);
+        }
+
+        levelText.text = "Level " + level;
+
+        if (PlayerController.instance.transform.position.y > 490 && one == true)
+        {
+            one = false;
+            levelComplete.SetActive(true);
+            anim.Play("CompleteFadeOff", 0, 0.25f);
         }
     }
 
@@ -57,6 +74,7 @@ public class GameControl : MonoBehaviour
     {
         if (gameOver && Input.GetMouseButtonDown(0))
         {
+            level = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
