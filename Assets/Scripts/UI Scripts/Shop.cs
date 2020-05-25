@@ -9,20 +9,47 @@ public class Shop : MonoBehaviour
 {
     public Button btn;
 
-    private int playermoney;
-
     public int price;
 
     private void Start()
     {
-        playermoney = PlayerController.instance.money;
+        
     }
 
     private void Update()
     {
-        if (playermoney < price)
+        if (PlayerController.money < price)
         {
             btn.interactable = false;
         }
+    }
+
+    public void BuyImmortality()
+    {
+        if (GameControl.immortality == false)
+        {
+            PlayerController.money -= 500;
+            GameControl.immortality = true;
+        }
+
+        btn.interactable = false;
+    }
+
+    public void BuyTimeSlow()
+    {
+        if (GameControl.slowTime == false)
+        {
+            PlayerController.money -= 250;
+            GameControl.slowTime = true;
+        }
+
+        btn.interactable = false;
+
+    }
+
+    public void BuyDashSpeed()
+    {
+        PlayerController.money -= 150;
+        PlayerController.dashCooldown -= 0.1f;
     }
 }

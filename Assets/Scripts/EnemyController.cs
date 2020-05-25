@@ -27,6 +27,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+
         if (direction) 
         {
             transform.Translate(Vector2.right * speed * Time.deltaTime);

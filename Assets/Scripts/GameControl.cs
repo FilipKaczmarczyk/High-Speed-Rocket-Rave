@@ -7,11 +7,16 @@ public class GameControl : MonoBehaviour
 {
     public static GameControl instance;
 
+    public GameObject[] planets;
+
     public GameObject levelComplete;
     public Animator anim;
 
-    public Text scoreText;                        
+    public Text scoreText;
+    public Text moneyText;
+
     public GameObject gameOvertext;
+    public GameObject gamewintext;
 
     public Text levelText;
 
@@ -19,12 +24,13 @@ public class GameControl : MonoBehaviour
     private float dashCooldownCounter;
     private float dashCooldown;
 
-    public GameObject targetPlanet;
+    private GameObject targetPlanet;
     SpriteRenderer targetPlanetRenderer;
 
-    private int score = 0;
+    public static int score = 0;
 
     public bool gameOver = false;
+    public bool gameWin = false;
 
     public bool levelEnd = false;
 
@@ -34,6 +40,13 @@ public class GameControl : MonoBehaviour
 
     public bool one = true;
 
+    public static bool slowTime = false;
+
+    public static bool immortality = false;
+
+    public Image immortalityImage;
+
+    public Image slowTimeImage;
     void Awake()
     {
         if (instance == null)
@@ -41,13 +54,17 @@ public class GameControl : MonoBehaviour
         else if (instance != this)
             Destroy(gameObject);
 
+        Instantiate(planets[level - 1], new Vector3(0f, -11.4f, 0f), Quaternion.identity);
+        targetPlanet = Instantiate(planets[level], new Vector3(0f, 500f, 0f), Quaternion.identity);
         targetPlanetRenderer = targetPlanet.GetComponent<SpriteRenderer>();
+
+        moneyText.text = PlayerController.money.ToString();
     }
 
     void Update()
     {
         dashCooldownCounter = PlayerController.instance.dashCooldownCounter;
-        dashCooldown = PlayerController.instance.dashCooldown;
+        dashCooldown = PlayerController.dashCooldown;
         DashCooldown(dashCooldownCounter);
 
         if (targetPlanetRenderer.isVisible == true)
@@ -64,10 +81,38 @@ public class GameControl : MonoBehaviour
 
         if (PlayerController.instance.transform.position.y > 490 && one == true)
         {
-            one = false;
-            levelComplete.SetActive(true);
-            anim.Play("CompleteFadeOff", 0, 0.25f);
+            if (level == 5)
+            {
+                gamewintext.SetActive(true);
+                gameWin = true;
+            }
+            else
+            {
+                one = false;
+                levelComplete.SetActive(true);
+                anim.Play("CompleteFadeOff", 0, 0.25f);
+            }
+            
         }
+
+        if(immortality == false)
+        {
+            immortalityImage.color = new Color(immortalityImage.color.r, immortalityImage.color.g, immortalityImage.color.b, 0.2f);
+        }
+        else
+        {
+            immortalityImage.color = new Color(immortalityImage.color.r, immortalityImage.color.g, immortalityImage.color.b, 1.0f);
+        }
+
+        if (slowTime == false)
+        {
+            slowTimeImage.color = new Color(slowTimeImage.color.r, slowTimeImage.color.g, slowTimeImage.color.b, 0.2f);
+        }
+        else
+        {
+            slowTimeImage.color = new Color(slowTimeImage.color.r, slowTimeImage.color.g, slowTimeImage.color.b, 1.0f);
+        }
+
     }
 
     void FixedUpdate()
@@ -75,7 +120,22 @@ public class GameControl : MonoBehaviour
         if (gameOver && Input.GetMouseButtonDown(0))
         {
             level = 1;
+            PlayerController.money = 0;
+            slowTime = false;
+            immortality = false;
+            score = 0;
+            PlayerController.dashCooldown = 2f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        if (gameWin && Input.GetMouseButtonDown(0))
+        {
+            level = 1;
+            PlayerController.money = 0;
+            slowTime = false;
+            immortality = false;
+            score = 0;
+            PlayerController.dashCooldown = 2f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
     }
 
@@ -89,11 +149,15 @@ public class GameControl : MonoBehaviour
         {
             PlayerController.instance.UpdateSpeed(1.02f);
 
-            LaserSpawner.instance.SpawnLaser();
+            //LaserSpawner.instance.SpawnLaser();
 
             if (RandomEnemy(1.0f) == true)
             {
                 //LaserSpawner.instance.SpawnUfo();
+            }
+            if (RandomEnemy(0.5f) == true)
+            {
+                LaserSpawner.instance.SpawnMoney();
             }
         }
     }
@@ -116,6 +180,12 @@ public class GameControl : MonoBehaviour
     {
         float amount = (dashCooldown - dashCooldownCounter) / dashCooldown;
         dashCooldownImage.fillAmount = amount;
+    }
+
+    public void PickUpMoney()
+    {
+        PlayerController.money += 20;
+        moneyText.text = PlayerController.money.ToString();
     }
 
 }

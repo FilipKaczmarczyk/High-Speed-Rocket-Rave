@@ -24,6 +24,6 @@ public class ShopExit : MonoBehaviour
 
     void Update()
     {
-        textLevel.text = "Level " + levelShop;
+        textLevel.text = "Level " + GameControl.level;
     }
 }
