@@ -7,6 +7,8 @@ public class LaserSpawner : MonoBehaviour
 
     public GameObject laserRightPrefab;
     public GameObject laserLeftPrefab;
+    public GameObject turretRightPrefab;
+    public GameObject turretLeftPrefab;
     public GameObject UfoPrefab;
     public GameObject UfoPrefab2;
     public GameObject MoneyPrefab;
@@ -34,12 +36,18 @@ public class LaserSpawner : MonoBehaviour
 
     public void SpawnLaser()
     {
-        var block = Random.Range(0, 4);
+        var block = Random.Range(0, 5);
 
         if (block == 1)
         {
             SpawnRightLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnRightTurret();
+                spawnYPostion += 5f;
+            }
             SpawnLeftLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 3)
@@ -48,8 +56,20 @@ public class LaserSpawner : MonoBehaviour
                 SpawnUfo(2);
                 spawnYPostion += 5f;
             }
+            if (GameControl.level >= 5)
+            {
+                spawnYPostion -= 2.5f;
+                SpawnUfo(1);
+                spawnYPostion += 2.5f;
+            }
             SpawnLeftLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnLeftTurret();
+                spawnYPostion += 5f;
+            }
             SpawnLeftLaser();
             spawnYPostion += 10f;
             if(GameControl.level >= 2)
@@ -60,6 +80,12 @@ public class LaserSpawner : MonoBehaviour
             }
             SpawnLeftLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnLeftTurret();
+                spawnYPostion += 5f;
+            }
             SpawnLeftLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 3)
@@ -68,8 +94,20 @@ public class LaserSpawner : MonoBehaviour
                 SpawnUfo(2);
                 spawnYPostion += 5f;
             }
+            if (GameControl.level >= 5)
+            {
+                spawnYPostion -= 2.5f;
+                SpawnUfo(1);
+                spawnYPostion += 2.5f;
+            }
             SpawnLeftLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnRightTurret();
+                spawnYPostion += 5f;
+            }
             SpawnRightLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 2)
@@ -83,6 +121,16 @@ public class LaserSpawner : MonoBehaviour
         {
             SpawnRightLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnRightTurret();
+                if (GameControl.level >= 5)
+                {
+                    SpawnLeftTurret();
+                }
+                spawnYPostion += 5f;
+            }
             SpawnLeftLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 3)
@@ -93,6 +141,16 @@ public class LaserSpawner : MonoBehaviour
             }
             SpawnRightLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnRightTurret();
+                if (GameControl.level >= 5)
+                {
+                    SpawnLeftTurret();
+                }
+                spawnYPostion += 5f;
+            }
             SpawnLeftLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 2)
@@ -103,6 +161,12 @@ public class LaserSpawner : MonoBehaviour
             }
             SpawnRightLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnLeftTurret();
+                spawnYPostion += 5f;
+            }
             SpawnLeftLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 3)
@@ -113,6 +177,16 @@ public class LaserSpawner : MonoBehaviour
             }
             SpawnRightLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnRightTurret();
+                if (GameControl.level >= 5)
+                {
+                    SpawnLeftTurret();
+                }
+                spawnYPostion += 5f;
+            }
             SpawnLeftLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 2)
@@ -126,6 +200,12 @@ public class LaserSpawner : MonoBehaviour
         {
             SpawnRightLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnLeftTurret();
+                spawnYPostion += 5f;
+            }
             SpawnLeftLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 3)
@@ -136,16 +216,34 @@ public class LaserSpawner : MonoBehaviour
             }
             SpawnLeftLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnLeftTurret();
+                spawnYPostion += 5f;
+            }
             SpawnRightLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 2)
             {
                 spawnYPostion -= 5f;
                 SpawnUfo(1);
+                if (GameControl.level >= 5)
+                {
+                    spawnYPostion -= 2.5f;
+                    SpawnLeftTurret();
+                    spawnYPostion += 2.5f;
+                }
                 spawnYPostion += 5f;
             }
             SpawnRightLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnLeftTurret();
+                spawnYPostion += 5f;
+            }
             SpawnLeftLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 3)
@@ -156,19 +254,43 @@ public class LaserSpawner : MonoBehaviour
             }
             SpawnRightLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnRightTurret();
+                spawnYPostion += 5f;
+            }
             SpawnRightLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 2)
             {
-                spawnYPostion -= 5f;
+                if (GameControl.level >= 5)
+                {
+                    spawnYPostion -= 5f;
+                    SpawnLeftTurret();
+                    spawnYPostion += 5f;
+                }
+                spawnYPostion -= 2.5f;
                 SpawnUfo(1);
-                spawnYPostion += 5f;
+                spawnYPostion += 2.5f;
             }
         }
         else if (block == 4)
         {
             SpawnRightLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnLeftTurret();
+                spawnYPostion += 5f;
+                if (GameControl.level >= 5)
+                {
+                    spawnYPostion -= 2.5f;
+                    SpawnUfo(1);
+                    spawnYPostion += 2.5f;
+                }
+            }
             SpawnRightLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 3)
@@ -179,6 +301,12 @@ public class LaserSpawner : MonoBehaviour
             }
             SpawnRightLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnRightTurret();
+                spawnYPostion += 5f;
+            }
             SpawnRightLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 2)
@@ -189,6 +317,18 @@ public class LaserSpawner : MonoBehaviour
             }
             SpawnLeftLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnLeftTurret();
+                spawnYPostion += 5f;
+                if (GameControl.level >= 5)
+                {
+                    spawnYPostion -= 2.5f;
+                    SpawnUfo(1);
+                    spawnYPostion += 2.5f;
+                }
+            }
             SpawnLeftLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 3)
@@ -199,6 +339,12 @@ public class LaserSpawner : MonoBehaviour
             }
             SpawnLeftLaser();
             spawnYPostion += 10f;
+            if (GameControl.level >= 4)
+            {
+                spawnYPostion -= 5f;
+                SpawnRightTurret();
+                spawnYPostion += 5f;
+            }
             SpawnLeftLaser();
             spawnYPostion += 10f;
             if (GameControl.level >= 2)
@@ -242,6 +388,24 @@ public class LaserSpawner : MonoBehaviour
             spawnXPosition = Random.Range(minSpawnXPosition, maxSpawnXPosition);
 
             GameObject laser = Instantiate(laserRightPrefab, new Vector3(spawnXPosition, spawnYPostion, 0f), Quaternion.identity);
+        }
+    }
+
+    public void SpawnRightTurret()
+    {
+        if (spawnYPostion <= 490)
+        {
+            GameObject turret = Instantiate(turretRightPrefab, new Vector3(2.84f, spawnYPostion, 0f), Quaternion.identity);
+            turret.transform.Rotate(new Vector3(0, 0, -90));
+        }
+    }
+
+    public void SpawnLeftTurret()
+    {
+        if (spawnYPostion <= 490)
+        {
+            GameObject turret = Instantiate(turretLeftPrefab, new Vector3(-2.84f, spawnYPostion, 0f), Quaternion.identity);
+            turret.transform.Rotate(new Vector3(0, 0, -270));
         }
     }
 

@@ -262,5 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f8ce645fd0dac4f9d08c1ef47d2bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Explosion: {fileID: 5890516671705000406, guid: 5a5a59106430b9442834dfdd8b6ac09c,
+    type: 3}
   speed: 4
   direction: 0

@@ -36,7 +36,7 @@ public class GameControl : MonoBehaviour
 
     public int dashCost = 100;
 
-    public static int level = 1;
+    public static int level = 5;
 
     public bool one = true;
 
@@ -83,6 +83,7 @@ public class GameControl : MonoBehaviour
         {
             if (level == 5)
             {
+                AudioManager.instance.WinMusic();
                 gamewintext.SetActive(true);
                 gameWin = true;
             }
@@ -164,6 +165,7 @@ public class GameControl : MonoBehaviour
 
     public void Died()
     {
+        AudioManager.instance.GameOverMusic();
         gameOvertext.SetActive(true);
         gameOver = true;
     }
@@ -184,8 +186,9 @@ public class GameControl : MonoBehaviour
 
     public void PickUpMoney()
     {
-        PlayerController.money += 20;
+        PlayerController.money += 25;
         moneyText.text = PlayerController.money.ToString();
+        AudioManager.instance.PlaySfx(3);
     }
 
 }

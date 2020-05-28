@@ -6,6 +6,8 @@ public class EnemyController : MonoBehaviour
 {
     private Rigidbody2D rb;
 
+    public GameObject Explosion;
+
     public float speed = 5f;
 
     public bool direction;
@@ -45,6 +47,8 @@ public class EnemyController : MonoBehaviour
 
         if(collision.collider.tag == "Player" && PlayerController.instance.dash == true)
         {
+            Instantiate(Explosion, transform.position, Quaternion.identity);
+            AudioManager.instance.PlaySfx(2);
             Destroy(gameObject);
             GameControl.instance.Scored(5, false);
         }

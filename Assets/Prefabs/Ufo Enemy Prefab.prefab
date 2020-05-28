@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7485510840982325557}
   - component: {fileID: 7485510840982325554}
   m_Layer: 9
-  m_Name: Ufo Enemy
+  m_Name: Ufo Enemy Prefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,5 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f8ce645fd0dac4f9d08c1ef47d2bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Explosion: {fileID: 5890516671705000406, guid: 5a5a59106430b9442834dfdd8b6ac09c,
+    type: 3}
   speed: 2
   direction: 0

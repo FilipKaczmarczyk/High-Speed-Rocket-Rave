@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform playerDashEffect;
 
+    public GameObject FreezePanel;
+
     public float rotationSpeed = 3f;
     public float speed = 2f;
 
@@ -18,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public static float dashCooldown = 2f;
     public float dashCooldownCounter = 0f;
 
-    public static int money = 1000;
+    public static int money = 0;
 
     private bool immortal = false;
     private bool timeSlow = false;
@@ -104,6 +106,7 @@ public class PlayerController : MonoBehaviour
     {
         currentSpeed = speed;
         dash = true;
+        AudioManager.instance.PlaySfx(0);
         speed = currentSpeed * 5;
         yield return new WaitForSeconds(0.09f);
         Vector3 beforeDashPos = transform.position;
@@ -125,9 +128,11 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator TimeSlow()
     {
+        FreezePanel.SetActive(true);
         timeSlow = true;
         yield return new WaitForSeconds(10f);
         timeSlow = false;
+        FreezePanel.SetActive(false);
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -140,6 +145,13 @@ public class PlayerController : MonoBehaviour
             }
         }
             
+    }
+
+    public bool CheckIsImmortal()
+    {
+        if (immortal)
+            return true;
+        return false;
     }
 
     public float GetDashCooldown()
