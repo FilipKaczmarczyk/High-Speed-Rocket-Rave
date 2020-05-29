@@ -36,7 +36,7 @@ public class GameControl : MonoBehaviour
 
     public int dashCost = 100;
 
-    public static int level = 5;
+    public static int level = 1;
 
     public bool one = true;
 
@@ -47,6 +47,8 @@ public class GameControl : MonoBehaviour
     public Image immortalityImage;
 
     public Image slowTimeImage;
+
+    private ParallaxBackground pB;
     void Awake()
     {
         if (instance == null)
@@ -57,6 +59,9 @@ public class GameControl : MonoBehaviour
         Instantiate(planets[level - 1], new Vector3(0f, -11.4f, 0f), Quaternion.identity);
         targetPlanet = Instantiate(planets[level], new Vector3(0f, 500f, 0f), Quaternion.identity);
         targetPlanetRenderer = targetPlanet.GetComponent<SpriteRenderer>();
+
+        pB = targetPlanet.GetComponent<ParallaxBackground>();
+        pB.enabled = !pB.enabled;
 
         moneyText.text = PlayerController.money.ToString();
     }
@@ -126,7 +131,7 @@ public class GameControl : MonoBehaviour
             immortality = false;
             score = 0;
             PlayerController.dashCooldown = 2f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
         if (gameWin && Input.GetMouseButtonDown(0))
         {
