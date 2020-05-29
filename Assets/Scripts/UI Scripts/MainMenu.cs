@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject levelSelect;
+    public GameObject credits;
 
     public void PlayGame()
     {
@@ -19,10 +20,22 @@ public class MainMenu : MonoBehaviour
         levelSelect.SetActive(true);
     }
 
-    public void Back()
+    public void Credits()
+    {
+        mainMenu.SetActive(false);
+        credits.SetActive(true);
+    }
+
+    public void BackFromLevelSelect()
     {
         mainMenu.SetActive(true);
         levelSelect.SetActive(false);
+    }
+
+    public void BackFromCredits()
+    {
+        mainMenu.SetActive(true);
+        credits.SetActive(false);
     }
 
     public void Quit()
